@@ -58,6 +58,24 @@ class RetrofitSingleton private constructor() {
         builder.connectTimeout(80, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
+            .addInterceptor { chain ->
+                val original = chain.request()
+                chain.proceed(with(original.newBuilder()) {
+                    val token = MiniMoneyBoxApplication.context.getAccessToken()
+                    if (token.isNullOrEmpty().not())
+                        header("Authorization", token!!)
+                    header("Content-Type", "")
+                    header("Accept", "application/json")
+                    header("AppId", "3a97b932a9d449c981b595")
+                    header("appVersion", "5.10.0")
+                    header("apiVersion", "3.0.0")
+                    method(original.method(), original.body())
+                    build()
+                })
+            }
+
+
+
         builder.addNetworkInterceptor(networkCacheInterceptor())
         builder.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         return builder

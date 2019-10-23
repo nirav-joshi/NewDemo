@@ -1,6 +1,7 @@
 package com.moneybank.moneyapp.login.data
 
 import com.example.minimoneybox.login.model.LoginRequestDto
+import com.example.minimoneybox.login.model.LoginResponseDto
 import com.moneybank.moneyapp.api.RetrofitSingleton
 import com.moneybank.moneyapp.api.enqueueOn
 import com.moneybank.moneyapp.api.failure
@@ -32,19 +33,19 @@ class LoginRepository private constructor() {
         return@lazy RetrofitSingleton.getInstance().provideApiService()
     }
 
-    fun doLogin(requestDto: LoginRequestDto, onFeedsCallback: (LoginRequestDto?) -> Unit) {
+    fun doLogin(requestDto: LoginRequestDto, onLoginCallback: (LoginResponseDto?) -> Unit) {
         if (MiniMoneyBoxApplication.isNetworkConnected()) {
             mApiService.login(requestDto).enqueueOn().success { _, response ->
                 when {
                     response.isSuccessful && response.code() == 200 -> {
-                        onFeedsCallback(response.body())
+                        onLoginCallback(response.body())
                     }
                     else -> {
-                        onFeedsCallback(response.body())
+                        onLoginCallback(response.body())
                     }
                 }
             } failure { _, t ->
-                onFeedsCallback(null)
+                onLoginCallback(null)
             }
         }
     }

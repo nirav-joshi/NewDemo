@@ -32,14 +32,13 @@ class LoginActivityBinder : AbstractBinding<ActivityLoginBinding>() {
     }
 
 
-
-     fun isInputValid(): Boolean {
+    fun isInputValid(): Boolean {
         var isvalid = false
         binding?.tilEmail?.let { til ->
             til.editText?.text?.toString()?.let {
                 if (it.isNotEmpty() && Pattern.matches(EMAIL_REGEX, it)) {
                     isvalid = true
-                    til.error=null
+                    til.error = null
                 } else {
                     isvalid = false
                     til.error = til.context?.getString(R.string.email_address_error)
@@ -50,7 +49,7 @@ class LoginActivityBinder : AbstractBinding<ActivityLoginBinding>() {
             til.editText?.text?.toString()?.let {
                 if (it.isNotEmpty() && Pattern.matches(PASSWORD_REGEX, it)) {
                     isvalid = true
-                    til.error=null
+                    til.error = null
                 } else {
                     isvalid = false
                     til.error = til.context?.getString(R.string.password_error)
@@ -59,9 +58,13 @@ class LoginActivityBinder : AbstractBinding<ActivityLoginBinding>() {
         }
         binding?.tilName?.let { til ->
             til.editText?.text?.toString()?.let {
-                if (it.isNotEmpty() && Pattern.matches(NAME_REGEX, it)) {
+                if (it.isEmpty()) {
                     isvalid = true
-                    til.error=null
+                    til.error = null
+                }
+                else if (it.isNotEmpty() && Pattern.matches(NAME_REGEX, it)) {
+                    isvalid = true
+                    til.error = null
                 } else {
                     isvalid = false
                     til.error = til.context?.getString(R.string.full_name_error)
@@ -73,8 +76,8 @@ class LoginActivityBinder : AbstractBinding<ActivityLoginBinding>() {
 
     fun getRequestObject(): LoginRequestDto {
         return LoginRequestDto().apply {
-            this.email=binding?.tilEmail?.editText?.text?.toString()
-            this.password=binding?.tilEmail?.editText?.text?.toString()
+            this.email = binding?.tilEmail?.editText?.text?.toString()
+            this.password = binding?.tilPassword?.editText?.text?.toString()
         }
     }
 

@@ -3,6 +3,7 @@ package com.moneybank.moneyapp.login.view
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.minimoneybox.login.model.LoginRequestDto
+import com.example.minimoneybox.login.model.LoginResponseDto
 import com.moneybank.moneyapp.login.data.LoginRepository
 import androidx.lifecycle.LiveData as LiveData
 
@@ -19,7 +20,7 @@ class LoginViewModel : ViewModel() {
         return@lazy LoginRepository.getInstance()
     }
 
-    val loginLiveData: LiveData<LoginRequestDto?> = MutableLiveData()
+    val loginLiveData: LiveData<LoginResponseDto?> = MutableLiveData()
 
 
 

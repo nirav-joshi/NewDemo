@@ -11,6 +11,8 @@ data class LoginRequestDto(
     var password:String?=null,
     @SerializedName("Idfa")
     var idfa:String?="ANYTHING"
+
+
 ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),

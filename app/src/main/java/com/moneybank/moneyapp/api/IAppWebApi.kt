@@ -1,6 +1,7 @@
 package com.moneybank.moneyapp.api
 
 import com.example.minimoneybox.login.model.LoginRequestDto
+import com.example.minimoneybox.login.model.LoginResponseDto
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -17,5 +18,5 @@ import retrofit2.http.POST
 interface IAppWebApi {
 
     @POST("users/login")
-    fun login(@Body info: LoginRequestDto): Call<LoginRequestDto?>
+    fun login(@Body info: LoginRequestDto): Call<LoginResponseDto?>
 }
