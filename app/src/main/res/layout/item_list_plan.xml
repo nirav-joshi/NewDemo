@@ -2,7 +2,13 @@
 <layout>
 
     <data>
+        <import type="android.text.TextUtils" />
 
+        <import type="android.view.View" />
+
+        <variable
+            name="productAccountDTO"
+            type="com.moneybank.moneyapp.account.model.ProductResponse" />
     </data>
 
     <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"

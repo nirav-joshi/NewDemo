@@ -63,7 +63,7 @@ class RetrofitSingleton private constructor() {
                 chain.proceed(with(original.newBuilder()) {
                     val token = MiniMoneyBoxApplication.context.getAccessToken()
                     if (token.isNullOrEmpty().not())
-                        header("Authorization", token!!)
+                        header("Authorization","Bearer ".plus(token))
                     header("Content-Type", "")
                     header("Accept", "application/json")
                     header("AppId", "3a97b932a9d449c981b595")
