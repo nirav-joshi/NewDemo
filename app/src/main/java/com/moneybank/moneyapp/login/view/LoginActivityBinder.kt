@@ -1,11 +1,12 @@
 package com.moneybank.moneyapp.login.view
 
+import android.animation.Animator
+import com.airbnb.lottie.LottieDrawable
 import com.example.minimoneybox.login.model.LoginRequestDto
 import com.moneybank.moneyapp.R
 import com.moneybank.moneyapp.base.AbstractBinding
 import com.moneybank.moneyapp.databinding.ActivityLoginBinding
 import java.util.regex.Pattern
-
 
 /**
  * [LoginActivityBinder] :
@@ -25,12 +26,38 @@ class LoginActivityBinder : AbstractBinding<ActivityLoginBinding>() {
 
     override fun onCreated() {
         binding?.loginBinder = this
+        setUpAnimation()
+    }
+
+    private fun setUpAnimation() {
+        binding?.animation?.playAnimation()
+        binding?.animation?.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {
+                // Left out because "Unused"
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                if (binding?.animation?.isAnimating == false) {
+                    binding?.animation?.repeatCount = LottieDrawable.INFINITE
+                    binding?.animation?.setMinAndMaxFrame(secondAnim.first, secondAnim.second)
+                    binding?.animation?.speed = 0.7f
+                    binding?.animation?.playAnimation()
+                }
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+                // Left out because "Unused"
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+                // Left out because "Unused"
+            }
+        })
     }
 
     override fun onDestroy() {
         binding?.loginBinder = null
     }
-
 
     fun isInputValid(): Boolean {
         var isvalid = false
@@ -61,8 +88,7 @@ class LoginActivityBinder : AbstractBinding<ActivityLoginBinding>() {
                 if (it.isEmpty()) {
                     isvalid = true
                     til.error = null
-                }
-                else if (it.isNotEmpty() && Pattern.matches(NAME_REGEX, it)) {
+                } else if (it.isNotEmpty() && Pattern.matches(NAME_REGEX, it)) {
                     isvalid = true
                     til.error = null
                 } else {
@@ -80,6 +106,4 @@ class LoginActivityBinder : AbstractBinding<ActivityLoginBinding>() {
             this.password = binding?.tilPassword?.editText?.text?.toString()
         }
     }
-
-
 }
