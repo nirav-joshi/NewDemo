@@ -4,16 +4,15 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-class LoginResponseDto() :Parcelable{
+class LoginResponseDto() : Parcelable {
     @SerializedName("Session")
-    var session:Session?=null
+    var session: Session? = null
 
     constructor(parcel: Parcel) : this() {
         session = parcel.readParcelable(Session::class.java.classLoader)
     }
 
-    class Session() :Parcelable {
-
+    class Session() : Parcelable {
         @SerializedName("BearerToken")
         var bearerToken: String? = null
         @SerializedName("ExternalSessionId")

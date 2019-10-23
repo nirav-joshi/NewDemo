@@ -6,14 +6,12 @@ import com.google.gson.annotations.SerializedName
 
 data class LoginRequestDto(
     @SerializedName("Email")
-    var email:String?=null,
+    var email: String? = null,
     @SerializedName("Password")
-    var password:String?=null,
+    var password: String? = null,
     @SerializedName("Idfa")
-    var idfa:String?="ANYTHING"
-
-
-):Parcelable {
+    var idfa: String? = "ANYTHING"
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
