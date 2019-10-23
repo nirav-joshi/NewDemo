@@ -127,3 +127,5 @@ fun SharedPreferences?.clearAll() {
     this?.edit()?.clear()?.apply()
 }
 fun SharedPreferences?.getAccessToken() = this.getValue<String>("token")
+
+fun SharedPreferences?.setAccessToken(token:String) = this.putValue("token",token)
