@@ -25,10 +25,18 @@ class AccountViewModel : ViewModel() {
     }
 
     val accountLiveData: LiveData<AccountDetailDTO?> = MutableLiveData()
+    val paymentLiveData: LiveData<Any?> = MutableLiveData()
 
     fun getAccountDetail(){
         accountRepository.getAccountDetails {
             (accountLiveData as? MutableLiveData<*>)?.value=it
+        }
+
+    }
+
+    fun oneOffPayment(amount:Long,investorProductId:Int){
+        accountRepository.oneoffPayment(amount,investorProductId) {
+            (paymentLiveData as? MutableLiveData<*>)?.value=it
         }
 
     }

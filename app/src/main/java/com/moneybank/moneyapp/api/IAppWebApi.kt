@@ -26,5 +26,5 @@ interface IAppWebApi {
     fun getAccountDetail(): Call<AccountDetailDTO?>
 
     @POST("oneoffpayments")
-    fun oneoffPayment(@Body info: LoginRequestDto): Call<LoginResponseDto?>
+    fun offPayment(@Body paymentObject:HashMap<String, Any>): Call<LoginResponseDto?>
 }

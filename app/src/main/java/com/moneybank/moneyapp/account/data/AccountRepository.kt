@@ -48,4 +48,26 @@ class AccountRepository private constructor() {
             }
         }
     }
+
+    fun oneoffPayment(amount:Long,investorProductId:Int, onPaymentCallback: (Any?) -> Unit) {
+        if (MiniMoneyBoxApplication.isNetworkConnected()) {
+            val map = HashMap<String, Any>().apply {
+                this["Amount"] = amount
+                this["InvestorProductId"] = investorProductId
+            }
+            mApiService.offPayment(map).enqueueOn().success { _, response ->
+                when {
+                    response.isSuccessful && response.code() == 200 -> {
+                        onPaymentCallback(response.body())
+                    }
+                    else -> {
+                        onPaymentCallback(response.body())
+                    }
+                }
+            } failure { _, t ->
+                onPaymentCallback(null)
+            }
+        }
+    }
+
 }

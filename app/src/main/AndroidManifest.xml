@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.minimoneybox.account.view.UserAccountActivity" />
+        <activity android:name=".account.view.AccountDetailActivity" />
     </application>
 
 </manifest>

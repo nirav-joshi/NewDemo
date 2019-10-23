@@ -8,7 +8,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="accountDetailBinder"
+            name="accountDetailActivityBinder"
             type="com.moneybank.moneyapp.account.view.AccountDetailActivityBinder" />
     </data>
 
